@@ -1,0 +1,9 @@
+@import "@fontsource-variable/noto-sans-jp";
+@import "tailwindcss";
+@plugin "daisyui" {
+	themes: dark --default;
+}
+
+body {
+	font-family: "Noto Sans JP Variable", sans-serif;
+}
