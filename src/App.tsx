@@ -26,7 +26,7 @@ function App() {
 		if (/\n{2,}/.test(inputText)) {
 			toast.info("Detected two or more consecutive line breaks, switching to single line mode.");
 			setMode("single");
-			const single = inputText.replace(/\n\n/g, "\n");
+			const single = inputText.replace(/\n{2,}/g, "\n");
 			setOutputText(single);
 		} else {
 			toast.info("Detected single line breaks, switching to double line mode.");
