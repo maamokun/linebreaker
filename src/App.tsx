@@ -17,8 +17,11 @@ function App() {
 	const [inputText, setInputText] = useState<string>("");
 	const [outputText, setOutputText] = useState<string>("");
 	const [mode, setMode] = useState<Mode>("single");
+	const [lineCount, setLineCount] = useState<number>(0);
 
 	useEffect(() => {
+		const lines = inputText.split("\n").filter((line) => line.trim() !== "");
+		setLineCount(lines.length);
 		if (inputText.trim() === "") {
 			setOutputText("");
 			return;
@@ -49,7 +52,7 @@ function App() {
 				<div className="text-4xl text-center font-bold mb-10">
 					The Linebreaker
 				</div>
-				<div className="flex flex-row items-center justify-center gap-5 my-5 w-full">
+				<div className="flex flex-col md:flex-row items-center justify-center gap-5 my-5 w-full">
 					<div className="flex flex-col space-y-5 w-full items-center justify-center">
 						<p className="text-2xl text-center font-bold">Input Text</p>
 						<textarea
@@ -69,6 +72,7 @@ function App() {
 						/>
 					</div>
 				</div>
+				<p className="text-md text-center mb-2">{lineCount} lines</p>
 				<div className="flex flex-row items-center justify-center gap-3 w-full mt-3">
 					<p className="text-md text-center">
 						{mode === "single" ? "Single Line" : "Double Line"}
@@ -85,7 +89,7 @@ function App() {
 						className="btn btn-primary"
 						onClick={() => {
 							navigator.clipboard.writeText(outputText);
-							toast.success("Copied to clipboard!");
+							toast.success(`Copied ${lineCount} lines to clipboard!`);
 						}}
 					>
 						<FaCopy className="mr-2" />
