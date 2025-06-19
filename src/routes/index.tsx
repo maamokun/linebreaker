@@ -13,26 +13,32 @@ function processLineBreaks(text: string, mode: Mode): string {
 	return normalized.replace(/\n/g, "\n\n");
 }
 
-function App() {
+export default function Linebreaker() {
 	const [inputText, setInputText] = useState<string>("");
 	const [outputText, setOutputText] = useState<string>("");
 	const [mode, setMode] = useState<Mode>("single");
 	const [lineCount, setLineCount] = useState<number>(0);
 
 	useEffect(() => {
-		const lines = inputText.split("\n").filter((line) => line.trim() !== "");
+		const lines = inputText
+			.split("\n")
+			.filter((line) => line.trim() !== "");
 		setLineCount(lines.length);
 		if (inputText.trim() === "") {
 			setOutputText("");
 			return;
 		}
 		if (/\n{2,}/.test(inputText)) {
-			toast.info("Detected two or more consecutive line breaks, switching to single line mode.");
+			toast.info(
+				"Detected two or more consecutive line breaks, switching to single line mode.",
+			);
 			setMode("single");
 			const single = inputText.replace(/\n{2,}/g, "\n");
 			setOutputText(single);
 		} else {
-			toast.info("Detected single line breaks, switching to double line mode.");
+			toast.info(
+				"Detected single line breaks, switching to double line mode.",
+			);
 			setMode("double");
 			const double = inputText.replace(/\n/g, "\n\n");
 			setOutputText(double);
@@ -54,7 +60,9 @@ function App() {
 				</div>
 				<div className="flex flex-col md:flex-row items-center justify-center gap-5 my-5 w-full">
 					<div className="flex flex-col space-y-5 w-full items-center justify-center">
-						<p className="text-2xl text-center font-bold">Input Text</p>
+						<p className="text-2xl text-center font-bold">
+							Input Text
+						</p>
 						<textarea
 							className="textarea textarea-md w-full h-96"
 							placeholder="Put your text here..."
@@ -89,7 +97,9 @@ function App() {
 						className="btn btn-primary"
 						onClick={() => {
 							navigator.clipboard.writeText(outputText);
-							toast.success(`Copied ${lineCount} lines to clipboard!`);
+							toast.success(
+								`Copied ${lineCount} lines to clipboard!`,
+							);
 						}}
 					>
 						<FaCopy className="mr-2" />
@@ -109,5 +119,3 @@ function App() {
 		</>
 	);
 }
-
-export default App;
