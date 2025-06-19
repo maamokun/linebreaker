@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaCopy, FaGithub } from "react-icons/fa";
+import { FaCopy } from "react-icons/fa";
 import { toast } from "sonner";
 
 type Mode = "single" | "double";
@@ -54,7 +54,7 @@ export default function Linebreaker() {
 
 	return (
 		<>
-			<div className="flex flex-col p-5 min-h-screen items-center justify-center h-full">
+			<div className="flex flex-col p-5 min-h-screen items-center justify-center">
 				<div className="text-4xl text-center font-bold mb-10">
 					The Linebreaker
 				</div>
@@ -105,15 +105,6 @@ export default function Linebreaker() {
 						<FaCopy className="mr-2" />
 						Copy Result
 					</button>
-				</div>
-				<div className="flex flex-row items-center justify-center mt-10">
-					<a
-						href="https://github.com/maamokun/linebreaker"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<FaGithub className="w-10 h-10" />
-					</a>
 				</div>
 			</div>
 		</>
