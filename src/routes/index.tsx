@@ -18,6 +18,24 @@ export default function Linebreaker() {
 	const [outputText, setOutputText] = useState<string>("");
 	const [mode, setMode] = useState<Mode>("single");
 	const [lineCount, setLineCount] = useState<number>(0);
+	const [autoCopy, setAutoCopy] = useState<boolean>(false);
+
+	const handleAutoCopy = () => {
+		if (autoCopy) {
+			setAutoCopy(false);
+			localStorage.removeItem("autoCopy");
+		} else {
+			setAutoCopy(true);
+			localStorage.setItem("autoCopy", "true");
+		}
+	};
+
+	useEffect(() => {
+		const storedAutoCopy = localStorage.getItem("autoCopy");
+		if (storedAutoCopy) {
+			setAutoCopy(JSON.parse(storedAutoCopy));
+		}
+	}, []);
 
 	useEffect(() => {
 		const lines = inputText
@@ -42,6 +60,12 @@ export default function Linebreaker() {
 			setMode("double");
 			const double = inputText.replace(/\n/g, "\n\n");
 			setOutputText(double);
+		}
+		if (autoCopy) {
+			navigator.clipboard.writeText(outputText);
+			toast.success(
+				`Copied ${lineCount} lines to clipboard!`,
+			);
 		}
 	}, [inputText]);
 
@@ -91,6 +115,19 @@ export default function Linebreaker() {
 						checked={mode === "double"}
 						onChange={handleModeToggle}
 					/>
+				</div>
+				<div className="flex flex-row items-center justify-center gap-3 w-full mt-3">
+					<label className="label cursor-pointer">
+						<p className="text-md text-white mr-2">
+							Auto Copy Result
+						</p>
+						<input
+							type="checkbox"
+							className="toggle"
+							checked={autoCopy}
+							onChange={() => handleAutoCopy()}
+						/>
+					</label>
 				</div>
 				<div className="flex flex-row items-center justify-center gap-3 mt-5">
 					<button
