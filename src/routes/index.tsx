@@ -63,9 +63,7 @@ export default function Linebreaker() {
 		}
 		if (autoCopy) {
 			navigator.clipboard.writeText(outputText);
-			toast.success(
-				`Copied ${lineCount} lines to clipboard!`,
-			);
+			toast.success(`Copied ${lineCount} lines to clipboard!`);
 		}
 	}, [inputText]);
 
