@@ -7,6 +7,23 @@
     <title>The Linebreaker</title>
   </head>
   <body>
+    <script src="https://cdn.mikn.dev/analytics/script" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        swetrix.init('sDcGqlguBK4D', {
+          apiURL: 'https://analytics.mikandev.tech/log',
+        })
+        swetrix.trackViews()
+      })
+    </script>
+
+    <noscript>
+      <img
+              src="https://analytics.mikandev.tech/log/noscript?pid=sDcGqlguBK4D"
+              alt=""
+              referrerpolicy="no-referrer-when-downgrade"
+      />
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

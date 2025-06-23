@@ -7,7 +7,7 @@ import "./index.css";
 import Linebreaker from "./routes/index.tsx";
 import Tables from "./routes/tables.tsx";
 
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaChartPie } from "react-icons/fa";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -26,13 +26,22 @@ createRoot(document.getElementById("root")!).render(
 						</button>
 					</NavLink>
 				</div>
-				<a
-					href="https://github.com/maamokun/linebreaker"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<FaGithub className="w-10 h-10" />
-				</a>
+				<div className={"flex flex-row items-center gap-4"}>
+					<a
+						href="https://github.com/maamokun/linebreaker"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<FaGithub className="w-10 h-10" />
+					</a>
+					<a
+						href="https://analytics.mikandev.com/projects/sDcGqlguBK4D"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<FaChartPie className="w-10 h-10" />
+					</a>
+				</div>
 			</div>
 			<Routes>
 				<Route path="/" element={<Linebreaker />} />
