@@ -76,7 +76,7 @@ export default function Linebreaker() {
 
 	return (
 		<>
-			<div className="flex flex-col p-5 min-h-screen items-center justify-center">
+			<div className="flex flex-col p-5 items-center justify-center mt-10ild">
 				<div className="text-4xl text-center font-bold mb-10">
 					The Linebreaker
 				</div>
