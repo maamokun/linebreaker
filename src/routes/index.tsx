@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import { FaFile, FaTable, FaFileAlt } from "react-icons/fa";
 
-const navItems = [
+export const navItems = [
 	{
 		to: "/linebreaker",
 		label: "The Linebreaker",

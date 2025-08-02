@@ -8,6 +8,8 @@ import Linebreaker from "./routes/linebreaker.tsx";
 import Tables from "./routes/tables.tsx";
 import HomePage from "./routes/index.tsx";
 
+import { navItems } from "./routes/index.tsx";
+
 import { FaGithub, FaChartPie, FaHome } from "react-icons/fa";
 
 createRoot(document.getElementById("root")!).render(
@@ -19,16 +21,15 @@ createRoot(document.getElementById("root")!).render(
 					<NavLink to={"/"}>
 						<FaHome className="w-10 h-10 mr-3" />
 					</NavLink>
-					<NavLink to={"/linebreaker"}>
-						<button className="btn btn-neutral text-xl">
-							The Linebreaker
-						</button>
-					</NavLink>
-					<NavLink to={"/tables"}>
-						<button className="btn btn-neutral text-xl">
-							Markdown Tables
-						</button>
-					</NavLink>
+					{navItems
+						.filter((item) => !item.comingSoon)
+						.map((item) => (
+							<NavLink key={item.label} to={item.to}>
+								<button className={"btn btn-neutral text-xl"}>
+									{item.label}
+								</button>
+							</NavLink>
+						))}
 				</div>
 				<div className={"flex flex-row items-center gap-4"}>
 					<a
