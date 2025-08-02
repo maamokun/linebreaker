@@ -10,7 +10,7 @@ import HomePage from "./routes/index.tsx";
 
 import { navItems } from "./routes/index.tsx";
 
-import { FaGithub, FaChartPie, FaHome } from "react-icons/fa";
+import { FaGithub, FaChartPie, FaHome, FaHeart } from "react-icons/fa";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -32,6 +32,13 @@ createRoot(document.getElementById("root")!).render(
 						))}
 				</div>
 				<div className={"flex flex-row items-center gap-4"}>
+					<a
+						href="https://revolut.me/mikandev"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<FaHeart className="w-10 h-10" />
+					</a>
 					<a
 						href="https://github.com/maamokun/linebreaker"
 						target="_blank"

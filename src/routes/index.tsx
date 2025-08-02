@@ -67,6 +67,37 @@ export default function HomePage() {
 						</div>
 					))}
 				</div>
+				<div className="card bg-base-200 shadow-xl my-10 w-2/3">
+					<div className="card-body items-center text-center">
+						<h2 className="card-title">About this project</h2>
+						<p className="">
+							This project is a collection of simple tools for
+							various tasks. All tools are open-source and free to
+							use.
+							<br />
+							If you have any suggestions or feature requests,
+							check out the GitHub repository!
+						</p>
+						<div className="card-actions mt-4 flex flex-row items-center justify-center">
+							<a
+								href="https://github.com/maamokun/linebreaker"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="btn btn-primary"
+							>
+								Go to GitHub
+							</a>
+							<a
+								href="https://revolut.me/mikandev"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="btn btn-secondary ml-2"
+							>
+								Support the project
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);
