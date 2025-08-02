@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")!).render(
 			<div className="navbar bg-base-100 shadow-sm justify-between flex flex-row items-center w-full p-5 gap-5">
 				<div className={"flex flex-row items-center gap-2"}>
 					<NavLink to={"/"}>
-							<FaHome className="w-10 h-10 mr-3" />
+						<FaHome className="w-10 h-10 mr-3" />
 					</NavLink>
 					<NavLink to={"/linebreaker"}>
 						<button className="btn btn-neutral text-xl">
