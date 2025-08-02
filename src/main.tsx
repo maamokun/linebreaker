@@ -44,7 +44,7 @@ createRoot(document.getElementById("root")!).render(
 				</div>
 			</div>
 			<Routes>
-				<Route path="/" element={<Linebreaker />} />
+				<Route path="/linebreaker" element={<Linebreaker />} />
 				<Route path="/tables" element={<Tables />} />
 			</Routes>
 		</BrowserRouter>
