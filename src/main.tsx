@@ -4,10 +4,11 @@ import { Toaster } from "sonner";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router";
 import "./index.css";
 
-import Linebreaker from "./routes/index.tsx";
+import Linebreaker from "./routes/linebreaker.tsx";
 import Tables from "./routes/tables.tsx";
+import HomePage from "./routes/index.tsx";
 
-import { FaGithub, FaChartPie } from "react-icons/fa";
+import { FaGithub, FaChartPie, FaHome } from "react-icons/fa";
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -16,6 +17,9 @@ createRoot(document.getElementById("root")!).render(
 			<div className="navbar bg-base-100 shadow-sm justify-between flex flex-row items-center w-full p-5 gap-5">
 				<div className={"flex flex-row items-center gap-2"}>
 					<NavLink to={"/"}>
+							<FaHome className="w-10 h-10 mr-3" />
+					</NavLink>
+					<NavLink to={"/linebreaker"}>
 						<button className="btn btn-neutral text-xl">
 							The Linebreaker
 						</button>
@@ -44,6 +48,7 @@ createRoot(document.getElementById("root")!).render(
 				</div>
 			</div>
 			<Routes>
+				<Route path="/" element={<HomePage />} />
 				<Route path="/linebreaker" element={<Linebreaker />} />
 				<Route path="/tables" element={<Tables />} />
 			</Routes>
