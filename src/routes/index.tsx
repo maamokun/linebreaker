@@ -1,110 +1,102 @@
-import { useState, useEffect } from "react";
-import { FaCopy } from "react-icons/fa";
-import { toast } from "sonner";
+import { NavLink } from "react-router";
+import { FaFile, FaTable, FaFileAlt } from "react-icons/fa";
 
-type Mode = "single" | "double";
+export const navItems = [
+	{
+		to: "/linebreaker",
+		label: "The Linebreaker",
+		description:
+			"Convert multiple line breaks into single or double line breaks.",
+		icon: <FaFile className="w-10 h-10 mr-3" />,
+		new: false,
+		comingSoon: false,
+	},
+	{
+		to: "/tables",
+		label: "Markdown Tables",
+		description: "Convert tab-separated text into Markdown tables.",
+		icon: <FaTable className="w-10 h-10 mr-3" />,
+		new: false,
+		comingSoon: false,
+	},
+	{
+		to: "/comments",
+		label: "DOCX Comments",
+		description: "Edit and manage comments in DOCX files.",
+		icon: <FaFileAlt className="w-10 h-10 mr-3" />,
+		new: false,
+		comingSoon: true,
+	},
+];
 
-function processLineBreaks(text: string, mode: Mode): string {
-	if (text.trim() === "") return "";
-	if (mode === "single") {
-		return text.replace(/\n{2,}/g, "\n");
-	}
-	const normalized = text.replace(/\n{2,}/g, "\n");
-	return normalized.replace(/\n/g, "\n\n");
-}
-
-export default function Linebreaker() {
-	const [inputText, setInputText] = useState<string>("");
-	const [outputText, setOutputText] = useState<string>("");
-	const [mode, setMode] = useState<Mode>("single");
-	const [lineCount, setLineCount] = useState<number>(0);
-
-	useEffect(() => {
-		const lines = inputText
-			.split("\n")
-			.filter((line) => line.trim() !== "");
-		setLineCount(lines.length);
-		if (inputText.trim() === "") {
-			setOutputText("");
-			return;
-		}
-		if (/\n{2,}/.test(inputText)) {
-			toast.info(
-				"Detected two or more consecutive line breaks, switching to single line mode.",
-			);
-			setMode("single");
-			const single = inputText.replace(/\n{2,}/g, "\n");
-			setOutputText(single);
-		} else {
-			toast.info(
-				"Detected single line breaks, switching to double line mode.",
-			);
-			setMode("double");
-			const double = inputText.replace(/\n/g, "\n\n");
-			setOutputText(double);
-		}
-	}, [inputText]);
-
-	const handleModeToggle = () => {
-		const newMode = mode === "double" ? "single" : "double";
-		const processed = processLineBreaks(inputText, newMode);
-		setOutputText(processed);
-		setMode(newMode);
-	};
-
+export default function HomePage() {
 	return (
 		<>
-			<div className="flex flex-col p-5 min-h-screen items-center justify-center">
+			<div className="flex flex-col p-5 items-center justify-center mt-10">
 				<div className="text-4xl text-center font-bold mb-10">
-					The Linebreaker
+					tools.sachade.co
 				</div>
-				<div className="flex flex-col md:flex-row items-center justify-center gap-5 my-5 w-full">
-					<div className="flex flex-col space-y-5 w-full items-center justify-center">
-						<p className="text-2xl text-center font-bold">
-							Input Text
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl">
+					{navItems.map((item) => (
+						<div
+							key={item.to}
+							className="card bg-base-200 shadow-xl"
+						>
+							<div className="card-body items-center text-center">
+								<div className="mb-2">{item.icon}</div>
+								<h2 className="card-title">{item.label}</h2>
+								{item.new && (
+									<span className="badge badge-secondary">
+										New!
+									</span>
+								)}
+								<p className="mb-4">{item.description}</p>
+								<div className="card-actions">
+									<button
+										disabled={item.comingSoon}
+										className="btn btn-primary"
+									>
+										<NavLink to={item.to}>
+											{item.comingSoon
+												? "Coming Soon!"
+												: `Go to ${item.label}`}
+										</NavLink>
+									</button>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+				<div className="card bg-base-200 shadow-xl my-10 w-2/3">
+					<div className="card-body items-center text-center">
+						<h2 className="card-title">About this project</h2>
+						<p className="">
+							This project is a collection of simple tools for
+							various tasks. All tools are open-source and free to
+							use.
+							<br />
+							If you have any suggestions or feature requests,
+							check out the GitHub repository!
 						</p>
-						<textarea
-							className="textarea textarea-md w-full h-96"
-							placeholder="Put your text here..."
-							onChange={(e) => setInputText(e.target.value)}
-							value={inputText}
-						/>
+						<div className="card-actions mt-4 flex flex-row items-center justify-center">
+							<a
+								href="https://github.com/maamokun/linebreaker"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="btn btn-primary"
+							>
+								Go to GitHub
+							</a>
+							<a
+								href="https://revolut.me/mikandev"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="btn btn-secondary ml-2"
+							>
+								Support the project
+							</a>
+						</div>
 					</div>
-					<div className="flex flex-col space-y-5 w-full items-center justify-center">
-						<p className="text-2xl text-center font-bold">Result</p>
-						<textarea
-							className="textarea textarea-md textarea-success w-full h-96 cursor-not-allowed"
-							placeholder="Result will appear here!"
-							value={outputText}
-							readOnly
-						/>
-					</div>
-				</div>
-				<p className="text-md text-center mb-2">{lineCount} lines</p>
-				<div className="flex flex-row items-center justify-center gap-3 w-full mt-3">
-					<p className="text-md text-center">
-						{mode === "single" ? "Single Line" : "Double Line"}
-					</p>
-					<input
-						type="checkbox"
-						className="toggle"
-						checked={mode === "double"}
-						onChange={handleModeToggle}
-					/>
-				</div>
-				<div className="flex flex-row items-center justify-center gap-3 mt-5">
-					<button
-						className="btn btn-primary"
-						onClick={() => {
-							navigator.clipboard.writeText(outputText);
-							toast.success(
-								`Copied ${lineCount} lines to clipboard!`,
-							);
-						}}
-					>
-						<FaCopy className="mr-2" />
-						Copy Result
-					</button>
 				</div>
 			</div>
 		</>
