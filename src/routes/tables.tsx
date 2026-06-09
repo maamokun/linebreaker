@@ -22,15 +22,15 @@ export default function Tables() {
 
 		// Parse tab-separated values
 		const headers = lines[0].split("\t").map((header) => header.trim());
-		const separator = headers.map(() => "---").join(" | ");
-		const rows = lines.slice(1).map((row) =>
-			row
-				.split("\t")
-				.map((cell) => cell.trim())
-				.join(" | "),
-		);
+		const separator = `| ${headers.map(() => "---").join(" | ")} |`;
+		const rows = lines.slice(1).map((row) => {
+			const cells = row.split("\t").map((cell) => cell.trim());
+			return `| ${cells.join(" | ")} |`;
+		});
 
-		const table = [headers.join(" | "), separator, ...rows].join("\n");
+		const table = [`| ${headers.join(" | ")} |`, separator, ...rows].join(
+			"\n",
+		);
 		setOutputText(table);
 	}, [inputText]);
 
